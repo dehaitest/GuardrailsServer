@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <script src="/static/js/user.js"></script>
+</head>
+<body>
+    <h2>Create User</h2>
+    <form id="createUserForm">
+        <input type="text" id="name" placeholder="Name">
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit">Create User</button>
+    </form>
+
+    <h2>Get User</h2>
+    <form id="getUserForm">
+        <input type="text" id="userUUId" placeholder="User UUID" required>
+        <button type="submit">Get User</button>
+    </form>
+
+    <h2>Login</h2>
+    <form id="loginForm">
+        <input type="email" id="loginEmail" placeholder="Email" required>
+        <input type="password" id="loginPassword" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <h2>Delete User</h2>
+    <form id="deleteUserForm">
+        <input type="email" id="deleteEmail" placeholder="Email" required>
+        <input type="password" id="deletePassword" placeholder="Password" required>
+        <button type="submit">Delete User</button>
+    </form>
+
+    <h2>Setup User</h2>
+    <form id="setupUserForm">
+        <label for="userData">User Data (JSON):</label><br>
+        <textarea id="userData" name="userData" rows="5" cols="33"></textarea><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <h2>Refresh Token</h2>
+    <button id="refreshTokenButton">Refresh Token</button>
+    <button id="declarationButton">Declaration</button>
+    <button id="automationButton">Automation</button>
+
+    <div id="result"></div>
+</body>
+</html>

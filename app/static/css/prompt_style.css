@@ -1,0 +1,105 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 20px;
+    padding: 20px;
+    height: 100vh; /* Full viewport height */
+}
+
+/* Styling for each column with max-height */
+.prompt-list, .prompt-details, .prompt-creation {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    max-height: 100vh; /* Maximum height of the screen */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Scrollable container for the prompt list */
+.prompt-list {
+    overflow-y: auto;
+}
+
+/* Styling for prompt items in two columns */
+.prompt-list .prompt-item {
+    display: grid;
+    grid-template-columns: 3fr 4fr 1fr;
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    align-items: center;
+}
+
+.prompt-list .prompt-item .prompt-name {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.prompt-list .prompt-item .prompt-name:hover {
+    text-decoration: underline;
+    color: blue;
+}
+
+.prompt-list .prompt-item .prompt-description {
+    margin-left: 10px;
+}
+
+#detailPromptText, #newPromptText {
+    font-size: 1.2em;
+    flex-grow: 1; /* Expand to fill the vertical space */
+    height: 100%; /* Full height within its container */
+    resize: vertical; /* Allow resizing vertically */
+    height: 40vh; /* Adjust the value accordingly */
+}
+
+/* Headings style */
+h2 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Form and input styling */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"], textarea {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="checkbox"] {
+    margin-top: 5px;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Additional styling can be added as per your preference */

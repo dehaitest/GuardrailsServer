@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload and WebSocket Connection</title>
+</head>
+<body>
+    <h2>Upload File</h2>
+    <form id="uploadForm">
+        <input type="file" id="fileInput" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    <div id="result"></div>
+
+    <h2>Connect to WebSocket</h2>
+    <div>
+        <label for="assistant_id">Assistant ID:</label>
+        <input type="text" id="assistant_id" placeholder="Enter Assistant ID">
+        <label for="thread_id">Thread ID:</label>
+        <input type="text" id="thread_id" placeholder="Enter Thread ID">
+        <label for="instruction">Instruction:</label>
+        <textarea id="instruction" placeholder="Enter Instruction" style="width: 200px;"></textarea>
+        <button id="connectButton">Connect</button>
+    </div>
+
+    <div id="websocketResult"></div>
+
+    <h3>sensitive_information, bias, topic, evaluative</h3>
+    <h2>Send Message</h2>
+    <div>
+        <label for="userMessage">User Message:</label>
+        <textarea id="userMessage" placeholder="Enter your message" style="width: 200px;"></textarea>
+        <button id="sendMessageButton">Send</button>
+    </div>
+
+    <div id="MessageResult"></div>
+
+    <script src="/static/js/uploadfile.js"></script>
+</body>
+</html>

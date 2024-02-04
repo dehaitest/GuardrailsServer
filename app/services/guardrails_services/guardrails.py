@@ -22,7 +22,7 @@ class Guardrails:
         guardrails_prompts = [
             {"name": 'sensitive_information', "content": await cls.get_prompt_by_name(db, 'sensitive_information'), "order": 5},
             {"name": 'topic', "content": await cls.get_prompt_by_name(db, 'topic'), "order": -5},
-            {"name": 'bias', "content": await cls.get_prompt_by_name(db, 'bias'), "order": 4},
+            {"name": 'bias', "content": await cls.get_prompt_by_name(db, 'bias'), "order": 2},
             {"name": 'evaluative', "content": await cls.get_prompt_by_name(db, 'evaluative'), "order": 3},
         ]
         prompts = {

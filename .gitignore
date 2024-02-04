@@ -1,5 +1,4 @@
 .env
-tests/
 guardrails_env/
 guardrails.pem
 notes.txt

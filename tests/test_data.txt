@@ -1,0 +1,3 @@
+{"message": "Summarize the content of the provided file.", "file_ids": ["file-JQkKnVqZ4nwcY71P2UTY9rIB"], "guardrails": ["sensitive_information"]}
+{"message": "What's the best restaurant in Sydney.", "file_ids": ["file-JQkKnVqZ4nwcY71P2UTY9rIB"], "guardrails": ["sensitive_information", "topic"]}
+{"message": "How does this project contribute to Australia", "file_ids": ["file-JQkKnVqZ4nwcY71P2UTY9rIB"], "guardrails": ["sensitive_information", "bias"]}

@@ -61,7 +61,6 @@ function appendMessageToResult(message) {
 // Updated WebSocket connection function to handle incoming messages
 function connectWebSocket(assistantId, threadId, Instruction) {
     //ws = new WebSocket(`ws://localhost:8000/ws/guardrails?assistant_id=${assistantId}&thread_id=${threadId}&instruction=${Instruction}`);
-    ws = new WebSocket(`ws://52.37.204.155/ws/guardrails?assistant_id=${assistantId}&thread_id=${threadId}&instruction=${Instruction}`);
     ws.onopen = function() {
         document.getElementById('websocketResult').textContent = 'Connected to WebSocket.';
     };

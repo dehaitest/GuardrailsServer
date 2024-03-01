@@ -57,13 +57,17 @@ class Guardrails:
             await self.client.beta.threads.messages.create(
                 thread_id=self.thread_id,
                 role="user",
-                content=step.get("content") + "\nThe file ids are " + str(json.loads(message_data).get('file_ids', [])),
+                content=step.get("content"),
+                file_ids=json.loads(message_data).get('file_ids', [])
                 )
             yield {"type": "chain", "name": step.get("name"), "content": "User input message: " + step.get("content")}
+            yield {"type": "system", "name": "message", "content": "Loading file... \n Processing user message... "}
         elif step.get("name") == "output":
             messages = await self.client.beta.threads.messages.list(thread_id=self.thread_id)
             yield {"type": "chain", "name": step.get("name"), "content": "The final result is:" + messages.data[0].content[0].text.value}
+            yield {"type": "system", "name": "message", "content": "End of response"}
         else:
+            yield {"type": "system", "name": "message", "content": "Processing step: " + step.get("name")}
             await self.client.beta.threads.messages.create(
                 thread_id=self.thread_id,
                 role="user",
@@ -99,14 +103,14 @@ class Guardrails:
             messages = await self.client.beta.threads.messages.list(thread_id=self.thread_id)
             yield {"type": "chain", "name": step.get("name"), "content": messages.data[0].content[0].text.value}
 
-            if step.get("order") < 0: 
-                prompt = [{"role": "system", "content": self.prompts.get('continue')}]
-                prompt.append({"role": "user", "content": "{}".format(messages.data[0].content[0].text.value)})
-                yield {"type": "system", "name": "message", "content": "Determine whether the conversation can be continued."}
-                response = await self.chatgpt_json.process_message(prompt)
-                result = json.loads(response.choices[0].message.content)
-                self.iscontinue = result.get("continue")
-                yield {"type": "system", "name": "message", "content": self.iscontinue}
+            # if step.get("order") < 0: 
+            #     prompt = [{"role": "system", "content": self.prompts.get('continue')}]
+            #     prompt.append({"role": "user", "content": "{}".format(messages.data[0].content[0].text.value)})
+            #     yield {"type": "system", "name": "message", "content": "Determine whether the conversation can be continued."}
+            #     response = await self.chatgpt_json.process_message(prompt)
+            #     result = json.loads(response.choices[0].message.content)
+            #     self.iscontinue = result.get("continue")
+            #     yield {"type": "system", "name": "message", "content": self.iscontinue}
 
     async def build_chain(self, message_data):
         user_guardrails = json.loads(message_data).get("guardrails")
@@ -122,11 +126,12 @@ class Guardrails:
     async def guardrails(self, message_data):
         self.steps = []
         self.iscontinue = ""
+        yield message_data
         await self.build_chain(message_data)
         yield {"chain": self.steps}
         for step in self.steps:
-            if self.iscontinue == "False":
-                break
+            # if self.iscontinue == "False":
+            #     break
             async for response in self.run_step(step, message_data):
                 yield response
         yield "__END_OF_RESPONSE__"

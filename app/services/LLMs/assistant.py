@@ -21,7 +21,8 @@ class Assistant:
                 tools=[
                     {"type": "retrieval"}, 
                     {"type": "code_interpreter"}
-                    ]
+                    ],
+                file_ids=["file-wfHNsjmNBlslFFznlebGl70X"]
             )
             return assistant
         except Exception as e:

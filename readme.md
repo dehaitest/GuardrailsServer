@@ -37,3 +37,11 @@ label: Evaluative mode
 value: evaluative
 
 description: Instead of directly answering questions, this mode guides users through a step-by-step thought process, encouraging independent thinking and analysis.
+
+### Instruction
+
+Instructions allow you to share anything you'd like our guardrails to consider in its response.
+
+### Add a file
+
+Allows you to upload a custom knowledge base file, seamlessly integrating tailored information into our guardrail protocols.

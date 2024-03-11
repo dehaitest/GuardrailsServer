@@ -28,12 +28,12 @@ document.addEventListener("DOMContentLoaded", function() {
         setupUser();
     });
 
-    document.getElementById('declarationButton').addEventListener('click', function() {
-        window.location.href = '/declaration.html';
+    document.getElementById('promptButton').addEventListener('click', function() {
+        window.location.href = '/prompt.html';
     });
 
-    document.getElementById('automationButton').addEventListener('click', function() {
-        window.location.href = '/automation.html';
+    document.getElementById('uploadfileButton').addEventListener('click', function() {
+        window.location.href = '/uploadfile.html';
     });
 });
 const accessToken = sessionStorage.getItem('accessToken');

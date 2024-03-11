@@ -8,11 +8,15 @@ function uploadFile() {
     const input = document.getElementById('fileInput');
     const file = input.files[0];
     const formData = new FormData();
+    const accessToken = sessionStorage.getItem('accessToken');
     formData.append('file', file);
 
     fetch('/uploadfile', {
         method: 'POST',
         body: formData, 
+        headers: {
+            "Authorization": `Bearer ${accessToken}` 
+        },
     })
     .then(response => {
         if (!response.ok) {
@@ -60,7 +64,8 @@ function appendMessageToResult(message) {
 
 // Updated WebSocket connection function to handle incoming messages
 function connectWebSocket(assistantId, threadId, Instruction) {
-    ws = new WebSocket(`ws://localhost:8000/ws/guardrails?assistant_id=${assistantId}&thread_id=${threadId}&instruction=${Instruction}`);
+    const accessToken = sessionStorage.getItem('accessToken');
+    ws = new WebSocket(`ws://localhost:8000/ws/guardrails?assistant_id=${assistantId}&thread_id=${threadId}&instruction=${Instruction}&token=${accessToken}`);
     ws.onopen = function() {
         document.getElementById('websocketResult').textContent = 'Connected to WebSocket.';
     };

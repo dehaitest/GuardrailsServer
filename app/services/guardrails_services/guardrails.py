@@ -119,7 +119,7 @@ class Guardrails:
                 self.steps.append(step)
         self.steps.append({"name": "processing", "content": "Continue processing user input message", "order": 0})
         self.steps.append({"name": "input", "content": json.loads(message_data).get('message'), "order": -100})
-        self.steps.append({"name": "output", "content": "", "order": 100})
+        self.steps.append({"name": "output", "content": "The output should be in MarkDown format. Highlight the changes made by Guardrails and explain them by bulletpoint.", "order": 100})
         self.steps.sort(key=lambda x: x["order"])
 
 

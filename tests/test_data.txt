@@ -6,4 +6,6 @@
 
 {"message": "How does this project contribute to Australia", "file_ids": ["file-wfHNsjmNBlslFFznlebGl70X"], "guardrails": [""]}
 
+{"message": "Why there is no blue text highlight? Does it mean guardrails did nothing? can you recognize what changes the guardrails did?", "file_ids":[], "guardrails": [""]}
+
 

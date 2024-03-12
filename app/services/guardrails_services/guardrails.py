@@ -27,7 +27,8 @@ class Guardrails:
         ]
         prompts = {
             "continue": await cls.get_prompt_by_name(db, 'continue'),
-            "instruction": await cls.get_prompt_by_name(db, 'instruction')
+            "instruction": await cls.get_prompt_by_name(db, 'instruction'),
+            "output": await cls.get_prompt_by_name(db, 'output')
         }
         assistant_init = await Assistant.create({'openai_key': settings.OPENAI_KEY})
         chatgpt_settings = {'model': settings.OPENAI_MODEL, 'openai_key': settings.OPENAI_KEY}
@@ -120,7 +121,7 @@ class Guardrails:
                 self.steps.append(step)
         self.steps.append({"name": "processing", "content": "Continue processing user input message", "order": 0})
         self.steps.append({"name": "input", "content": json.loads(message_data).get('message'), "order": -100})
-        self.steps.append({"name": "output", "content": "The output should be in MarkDown format. Highlight the key information using red color text made by the guardrail with inline html and explain them by bulletpoint.", "order": 100})
+        self.steps.append({"name": "output", "content": self.prompts.get('output'), "order": 100})
         self.steps.sort(key=lambda x: x["order"])
 
 

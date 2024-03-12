@@ -62,10 +62,6 @@ class Guardrails:
                 )
             yield {"type": "chain", "name": step.get("name"), "content": "User input message: " + step.get("content")}
             yield {"type": "system", "name": "message", "content": "Loading file... \n Processing user message... "}
-        elif step.get("name") == "output":
-            messages = await self.client.beta.threads.messages.list(thread_id=self.thread_id)
-            yield {"type": "chain", "name": step.get("name"), "content": "The final result is:" + messages.data[0].content[0].text.value}
-            yield {"type": "system", "name": "message", "content": "End of response"}
         else:
             yield {"type": "system", "name": "message", "content": "Processing step: " + step.get("name")}
             await self.client.beta.threads.messages.create(
@@ -99,9 +95,14 @@ class Guardrails:
                         thread_id=self.thread_id,
                         message_id=run_step.step_details.message_creation.message_id)
                     yield {"type": "system", "name": "message", "content": message.content[0].text.value}
-
+                
             messages = await self.client.beta.threads.messages.list(thread_id=self.thread_id)
-            yield {"type": "chain", "name": step.get("name"), "content": messages.data[0].content[0].text.value}
+
+            if step.get("name") == "output":
+                yield {"type": "chain", "name": step.get("name"), "content": "The final result is:" + messages.data[0].content[0].text.value}
+                yield {"type": "system", "name": "message", "content": "End of response"}
+            else:
+                yield {"type": "chain", "name": step.get("name"), "content": messages.data[0].content[0].text.value}
 
             # if step.get("order") < 0: 
             #     prompt = [{"role": "system", "content": self.prompts.get('continue')}]
@@ -119,7 +120,7 @@ class Guardrails:
                 self.steps.append(step)
         self.steps.append({"name": "processing", "content": "Continue processing user input message", "order": 0})
         self.steps.append({"name": "input", "content": json.loads(message_data).get('message'), "order": -100})
-        self.steps.append({"name": "output", "content": "The output should be in MarkDown format. Highlight the changes made by Guardrails and explain them by bulletpoint.", "order": 100})
+        self.steps.append({"name": "output", "content": "The output should be in MarkDown format. Highlight the key information using red color text made by the guardrail with inline html and explain them by bulletpoint.", "order": 100})
         self.steps.sort(key=lambda x: x["order"])
 
 

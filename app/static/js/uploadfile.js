@@ -77,4 +77,3 @@ function connectWebSocket(assistantId, threadId, Instruction) {
         appendMessageToResult("Server: " + e.data);
     };
 }
-

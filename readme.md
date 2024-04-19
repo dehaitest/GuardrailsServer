@@ -15,9 +15,13 @@ You need to enter password 123 here.
 Run the command in mysql command line
 
 `CREATE USER 'guardrails'@'%' IDENTIFIED BY 'guardrails123';`
+
 `GRANT ALL PRIVILEGES ON *.* TO 'guardrails'@'%';`
+
 `FLUSH PRIVILEGES;`
+
 `CREATE DATABASE guardrails;`
+
 `USE guardrails;`
 
 `CREATE TABLE prompt (
@@ -38,7 +42,30 @@ Run the command in mysql command line
     hashed_password VARCHAR(255),
     create_datetime DATETIME,
     update_datetime DATETIME
-);
+);`
+
+2. Deploy chromadb
+
+`sudo docker pull chromadb/chroma`
+
+`sudo docker run -p 5000:8000 chromadb/chroma` Replace 5000 with your own hostport
+
+3. Create python venv
+
+`python3 -m venv .venv`
+
+Note: add .venv/ to .gitignore
+
+`Source .venv/bin/activate`
+
+`pip install -t requirements.txt`
+
+4. Create `.env` from `.env_template`, replace OPENAI_KEY with your key. Replace SECRET_KEY with any random chars.
+
+5. Run the application
+
+`uvicorn app.main:app --reload --log-level debug`
+
 
 
 ## Description of guardrails

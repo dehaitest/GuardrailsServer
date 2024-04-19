@@ -1,5 +1,6 @@
 .env
 __pycache__/
+.venv/
 guardrails_env/
 guardrails.pem
 notes.txt

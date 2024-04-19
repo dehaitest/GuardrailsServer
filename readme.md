@@ -54,8 +54,6 @@ Run the command in mysql command line
 
 `python3 -m venv .venv`
 
-Note: add .venv/ to .gitignore
-
 `Source .venv/bin/activate`
 
 `pip install -t requirements.txt`

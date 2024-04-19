@@ -1,3 +1,46 @@
+## How to deploy
+
+1. Deploy mysql database
+
+Pull mysql image
+`sudo docker pull mysql`
+
+Run mysql container
+`sudo docker run --name=mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123 -d mysql`
+
+go into the mysql container
+`sudo docker exec -it mysql mysql -uroot -p`
+You need to enter password 123 here.
+
+Run the command in mysql command line
+
+`CREATE USER 'guardrails'@'%' IDENTIFIED BY 'guardrails123';`
+`GRANT ALL PRIVILEGES ON *.* TO 'guardrails'@'%';`
+`FLUSH PRIVILEGES;`
+`CREATE DATABASE guardrails;`
+`USE guardrails;`
+
+`CREATE TABLE prompt (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(32),
+    prompt TEXT,
+    description TEXT,
+    create_datetime DATETIME,
+    update_datetime DATETIME,
+    active BOOLEAN
+);`
+
+`CREATE TABLE user (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(32),
+    uuid VARCHAR(32) UNIQUE,
+    email VARCHAR(255) UNIQUE,
+    hashed_password VARCHAR(255),
+    create_datetime DATETIME,
+    update_datetime DATETIME
+);
+
+
 ## Description of guardrails
 
 Lable means how to display the guardrails in checkbox.
